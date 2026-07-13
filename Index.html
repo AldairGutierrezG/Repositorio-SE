@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repositorio Sistemas Electromécanicos</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f9;
+  margin:0;
+}
+
+header{
+  background:#003366;
+  color:white;
+  padding:20px;
+  position:relative;
+  text-align:center;
+}
+
+.logo{
+  position:absolute;
+  top:15px;
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  background:white;
+  border-radius:10px;
+  padding:5px;
+}
+
+.logo-izq{
+  left:20px;
+}
+
+.logo-der{
+  right:20px;
+}
+
+header h1{
+  margin:0;
+  font-size:32px;
+}
+
+header p{
+  margin:8px 0 0;
+  font-size:18px;
+}
+
+.contenedor{
+  display:flex;
+  min-height:85vh;
+}
+
+.menu{
+  width:280px;
+  background:white;
+  padding:20px;
+  box-shadow:2px 0 8px rgba(0,0,0,0.15);
+}
+
+.menu button{
+  width:100%;
+  padding:14px;
+  margin-bottom:10px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.activa{
+  background:#003366;
+  color:white;
+}
+
+.bloqueada{
+  background:#ddd;
+  color:#777;
+  cursor:not-allowed;
+}
+
+.visualizador{
+  flex:1;
+  padding:25px;
+  overflow-y:auto;
+}
+
+.bloque-material{
+  background:white;
+  padding:20px;
+  margin-bottom:30px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.bloque-material h2{
+  color:#003366;
+  margin-top:0;
+}
+
+iframe{
+  width:100%;
+  height:75vh;
+  border:none;
+  border-radius:10px;
+  background:white;
+}
+
+.mensaje{
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+footer{
+  background:#003366;
+  color:white;
+  text-align:center;
+  padding:15px;
+  font-size:14px;
+}
+
+/* Adaptación para tablet */
+@media(max-width:900px){
+  .contenedor{
+    flex-direction:column;
+  }
+
+  .menu{
+    width:100%;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .menu button{
+    min-width:140px;
+    margin-bottom:0;
+  }
+
+  iframe{
+    height:65vh;
+  }
+}
+
+/* Adaptación para celular */
+@media(max-width:600px){
+  header{
+    padding:90px 15px 20px;
+  }
+
+  .logo{
+    width:65px;
+    height:65px;
+    top:15px;
+  }
+
+  .logo-izq{
+    left:15px;
+  }
+
+  .logo-der{
+    right:15px;
+  }
+
+  header h1{
+    font-size:24px;
+  }
+
+  header p{
+    font-size:15px;
+  }
+
+  .visualizador{
+    padding:15px;
+  }
+
+  .bloque-material{
+    padding:12px;
+  }
+
+  iframe{
+    height:55vh;
+  }
+
+  footer{
+    font-size:12px;
+    padding:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="utld.png" class="logo logo-izq" alt="Logo izquierdo">
+
+  <div>
+    <h1>Repositorio</h1>
+    <p>Sistemas Electromécanicos</p>
+  </div>
+
+  <img src="renders.png" class="logo logo-der" alt="Logo derecho">
+</header>
+
+<div class="contenedor">
+
+  <div class="menu" id="menu"></div>
+
+  <div class="visualizador" id="visualizador">
+    <div class="mensaje">
+      <h2>Selecciona una unidad</h2>
+      <p>Elige una unidad desbloqueada para visualizar sus materiales.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Universidad Tecnológica de La Laguna Durango | TSU Energía Turbo - Solar
+</footer>
+
+<script>
+const unidades = [
+  {
+    nombre: "Unidad 1: Introducción a los Sistemas Electromecánicos de Generación de Energía.",
+    activa: true,
+    recursos: [
+      {
+        titulo: "Presentación",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vShTHilMO5DZhXWcvfNX2FlMEelszVi5ChP64wyDP5BXSwdk1ZyNFiYTSBnrdPABw/pubembed?start=false&loop=false&delayms=5000"
+      }
+    ]
+  },
+
+  {
+    nombre: "Unidad 2: Elementos de Conversión Mecánica a Eléctrica.",
+    activa: true,
+    recursos: [
+      {
+        titulo: "Presentación",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vSJy0C-Ss_Zel2bQ3dhDM0jSX8tvg1-psXMH7X91-ZHkVnJqVIwAX7ud5pBqrdrOg/pubembed?start=false&loop=false&delayms=5000"
+      }
+    ]
+  },
+
+  {
+    nombre: "Unidad 3: Sistemas Electromecánicos de Minihidráulica.",
+    activa: true,
+    recursos: [
+      {
+        titulo: "Presentación",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vQlzzWbxC9sSyyZfUD6nvo5Ggcf2EyASaxkif81jIBRjgqyqNPb_vBAU7RX9TQYCg/pubembed?start=false&loop=false&delayms=5000"
+      },
+      {
+        titulo: "Aplicación de Dinámica de Fluidos en Centrales Hidroeléctricas.",
+        tipo: "pdf",
+        url: "https://drive.google.com/file/d/1njPi33m1BgegJEAxUMJ8u508M9SDsF-K/preview"
+      },
+	{
+        titulo: "Centrales Hidroeléctricas (Función, Clasificación y Principales Tipos)",
+        tipo: "video",
+        url: "https://drive.google.com/file/d/1IiInvb3xdF12Qnmn3Cig2e6HrJFrDxtO/preview"
+      }
+    ]
+  },
+
+  {
+    nombre: "Unidad 4: Sistemas Electromecánicos de los Aerogeneradores.",
+    activa: true,
+    recursos: [
+      {
+        titulo: "Presentación",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vRNhzF5z0eR-tSAiLiOPGF0KkJJjvCECnijtviJ7EXkBihfAU3SJSE3t4YYo7WsJg/pubembed?start=false&loop=false&delayms=5000"
+      }
+    ]
+  }
+];
+
+const menu = document.getElementById("menu");
+const visualizador = document.getElementById("visualizador");
+
+unidades.forEach((unidad) => {
+  const boton = document.createElement("button");
+
+  boton.textContent = unidad.activa ? unidad.nombre : unidad.nombre + " 🔒";
+  boton.className = unidad.activa ? "activa" : "bloqueada";
+
+  boton.onclick = () => {
+    if(unidad.activa){
+      mostrarUnidadCompleta(unidad);
+    } else {
+      visualizador.innerHTML = `
+        <div class="mensaje">
+          <h2>${unidad.nombre} bloqueada 🔒</h2>
+          <p>Esta unidad estará disponible cuando el docente la active.</p>
+        </div>
+      `;
+    }
+  };
+
+  menu.appendChild(boton);
+});
+
+function mostrarUnidadCompleta(unidad){
+  let contenido = `
+    <h1>${unidad.nombre}</h1>
+  `;
+
+  unidad.recursos.forEach((recurso) => {
+    contenido += `
+      <section class="bloque-material">
+        <h2>${icono(recurso.tipo)} ${recurso.titulo}</h2>
+        <iframe src="${recurso.url}" allowfullscreen></iframe>
+      </section>
+    `;
+  });
+
+  visualizador.innerHTML = contenido;
+  visualizador.scrollTop = 0;
+}
+
+function icono(tipo){
+  if(tipo === "presentacion") return "📊";
+  if(tipo === "pdf") return "📕";
+  if(tipo === "video") return "▶️";
+  return "📁";
+}
+</script>
+
+</body>
+</html>
