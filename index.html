@@ -198,6 +198,222 @@ footer{
     padding:12px;
   }
 }
+	/* Galería de fotografías */
+
+.galeria{
+  position:relative;
+  width:100%;
+  min-height:500px;
+  background:#111;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.galeria-imagen{
+  display:block;
+  width:100%;
+  max-height:75vh;
+  object-fit:contain;
+  background:#111;
+}
+
+.galeria-boton{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:50px;
+  height:60px;
+  border:none;
+  border-radius:8px;
+  background:rgba(0,0,0,0.65);
+  color:white;
+  font-size:32px;
+  cursor:pointer;
+  z-index:2;
+}
+
+.galeria-boton:hover{
+  background:rgba(0,51,102,0.9);
+}
+
+.galeria-anterior{
+  left:15px;
+}
+
+.galeria-siguiente{
+  right:15px;
+}
+
+.galeria-contador{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:14px;
+}
+
+.galeria-nombre{
+  position:absolute;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:80%;
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.galeria-cargando{
+  color:white;
+  font-size:18px;
+  text-align:center;
+  padding:40px;
+}
+
+@media(max-width:600px){
+  .galeria{
+    min-height:350px;
+  }
+
+  .galeria-boton{
+    width:42px;
+    height:52px;
+    font-size:26px;
+  }
+
+  .galeria-anterior{
+    left:5px;
+  }
+
+  .galeria-siguiente{
+    right:5px;
+  }
+
+  .galeria-imagen{
+    max-height:60vh;
+  }
+
+  .galeria-nombre{
+    font-size:13px;
+  }
+}
+	/* Galería de fotografías */
+
+.galeria{
+  position:relative;
+  width:100%;
+  min-height:500px;
+  background:#111;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.galeria-imagen{
+  display:block;
+  width:100%;
+  max-height:75vh;
+  object-fit:contain;
+  background:#111;
+}
+
+.galeria-boton{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:50px;
+  height:60px;
+  border:none;
+  border-radius:8px;
+  background:rgba(0,0,0,0.65);
+  color:white;
+  font-size:32px;
+  cursor:pointer;
+  z-index:2;
+}
+
+.galeria-boton:hover{
+  background:rgba(0,51,102,0.9);
+}
+
+.galeria-anterior{
+  left:15px;
+}
+
+.galeria-siguiente{
+  right:15px;
+}
+
+.galeria-contador{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:14px;
+}
+
+.galeria-nombre{
+  position:absolute;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:80%;
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.galeria-cargando{
+  color:white;
+  font-size:18px;
+  text-align:center;
+  padding:40px;
+}
+
+@media(max-width:600px){
+  .galeria{
+    min-height:350px;
+  }
+
+  .galeria-boton{
+    width:42px;
+    height:52px;
+    font-size:26px;
+  }
+
+  .galeria-anterior{
+    left:5px;
+  }
+
+  .galeria-siguiente{
+    right:5px;
+  }
+
+  .galeria-imagen{
+    max-height:60vh;
+  }
+
+  .galeria-nombre{
+    font-size:13px;
+  }
+}
 </style>
 </head>
 
@@ -232,6 +448,8 @@ footer{
 </footer>
 
 <script>
+const URL_APPS_SCRIPT =
+  "https://script.google.com/macros/s/AKfycbwf7FzEdHZ-g5nOYQ4WJn4jL4KbU5IQfEC_xDCVd0Ts0e-TrpZJGLXmtQf5ZYpUtefB/exec";
 const unidades = [
   {
     nombre: "Unidad 1: Introducción a los Sistemas Electromecánicos de Generación de Energía.",
@@ -292,7 +510,12 @@ const unidades = [
         titulo: "Cómo Funcionan Realmente las Turbinas Eólicas Los Secretos Ocultos",
         tipo: "video",
         url: "https://drive.google.com/file/d/1lQDa3ip7WKrzvJ8QvT0nC3ZY19gitq7w/preview"
-      }
+      },
+    {
+      titulo: "Fotografías y apuntes de clase",
+      tipo: "galeria",
+      carpetaId: "1xAD_WRT-E3M8UFT6BdxcGd4wBEmEAoNX"
+    	}
     ]
   },
 
@@ -339,23 +562,163 @@ function mostrarUnidadCompleta(unidad){
     <h1>${unidad.nombre}</h1>
   `;
 
-  unidad.recursos.forEach((recurso) => {
+  unidad.recursos.forEach((recurso, indice) => {
     contenido += `
       <section class="bloque-material">
         <h2>${icono(recurso.tipo)} ${recurso.titulo}</h2>
-        <iframe src="${recurso.url}" allowfullscreen></iframe>
+    `;
+
+    if(recurso.tipo === "galeria"){
+      contenido += `
+        <div
+          class="galeria"
+          id="galeria-${indice}"
+          data-carpeta="${recurso.carpetaId}"
+        >
+          <div class="galeria-cargando">
+            Cargando fotografías...
+          </div>
+        </div>
+      `;
+    } else {
+      contenido += `
+        <iframe
+          src="${recurso.url}"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      `;
+    }
+
+    contenido += `
       </section>
     `;
   });
 
   visualizador.innerHTML = contenido;
   visualizador.scrollTop = 0;
+
+  unidad.recursos.forEach((recurso, indice) => {
+    if(recurso.tipo === "galeria"){
+      cargarGaleria(
+        `galeria-${indice}`,
+        recurso.carpetaId
+      );
+    }
+  });
+}
+
+	async function cargarGaleria(contenedorId, carpetaId){
+  const contenedor = document.getElementById(contenedorId);
+
+  try {
+    const respuesta = await fetch(
+      `${URL_APPS_SCRIPT}?folder=${encodeURIComponent(carpetaId)}`
+    );
+
+    if(!respuesta.ok){
+      throw new Error("No fue posible consultar la carpeta.");
+    }
+
+    const imagenes = await respuesta.json();
+
+    if(imagenes.error){
+      throw new Error(imagenes.error);
+    }
+
+    if(!imagenes.length){
+      contenedor.innerHTML = `
+        <div class="galeria-cargando">
+          Esta carpeta todavía no contiene fotografías.
+        </div>
+      `;
+      return;
+    }
+
+    crearCarrusel(contenedor, imagenes);
+
+  } catch(error) {
+    console.error(error);
+
+    contenedor.innerHTML = `
+      <div class="galeria-cargando">
+        <p>No se pudieron cargar las fotografías.</p>
+        <small>${error.message}</small>
+      </div>
+    `;
+  }
+}
+
+function crearCarrusel(contenedor, imagenes){
+  let posicion = 0;
+
+  contenedor.innerHTML = `
+    <div class="galeria-nombre"></div>
+
+    <button
+      class="galeria-boton galeria-anterior"
+      aria-label="Fotografía anterior">
+      &#10094;
+    </button>
+
+    <img
+      class="galeria-imagen"
+      alt="Fotografía o apunte de clase"
+    >
+
+    <button
+      class="galeria-boton galeria-siguiente"
+      aria-label="Fotografía siguiente">
+      &#10095;
+    </button>
+
+    <div class="galeria-contador"></div>
+  `;
+
+  const imagen = contenedor.querySelector(".galeria-imagen");
+  const nombre = contenedor.querySelector(".galeria-nombre");
+  const contador = contenedor.querySelector(".galeria-contador");
+  const anterior = contenedor.querySelector(".galeria-anterior");
+  const siguiente = contenedor.querySelector(".galeria-siguiente");
+
+  function mostrarImagen(){
+    const elemento = imagenes[posicion];
+
+    imagen.src = elemento.url;
+    imagen.alt = elemento.nombre;
+    nombre.textContent = elemento.nombre;
+    contador.textContent =
+      `${posicion + 1} de ${imagenes.length}`;
+  }
+
+  anterior.addEventListener("click", () => {
+    posicion--;
+
+    if(posicion < 0){
+      posicion = imagenes.length - 1;
+    }
+
+    mostrarImagen();
+  });
+
+  siguiente.addEventListener("click", () => {
+    posicion++;
+
+    if(posicion >= imagenes.length){
+      posicion = 0;
+    }
+
+    mostrarImagen();
+  });
+
+  mostrarImagen();
 }
 
 function icono(tipo){
   if(tipo === "presentacion") return "📊";
   if(tipo === "pdf") return "📕";
   if(tipo === "video") return "▶️";
+  if(tipo === "galeria") return "📷";
   return "📁";
 }
 </script>
