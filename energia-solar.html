@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repositorio Energía Solar</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f9;
+  margin:0;
+}
+
+header{
+  background:#003366;
+  color:white;
+  padding:20px;
+  position:relative;
+  text-align:center;
+}
+
+.logo{
+  position:absolute;
+  top:15px;
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  background:white;
+  border-radius:10px;
+  padding:5px;
+}
+
+.logo-izq{
+  left:20px;
+}
+
+.logo-der{
+  right:20px;
+}
+
+header h1{
+  margin:0;
+  font-size:32px;
+}
+
+header p{
+  margin:8px 0 0;
+  font-size:18px;
+}
+
+.contenedor{
+  display:flex;
+  min-height:85vh;
+}
+
+.menu{
+  width:280px;
+  background:white;
+  padding:20px;
+  box-shadow:2px 0 8px rgba(0,0,0,0.15);
+}
+
+.menu button{
+  width:100%;
+  padding:14px;
+  margin-bottom:10px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.activa{
+  background:#003366;
+  color:white;
+}
+
+.bloqueada{
+  background:#ddd;
+  color:#777;
+  cursor:not-allowed;
+}
+
+.visualizador{
+  flex:1;
+  padding:25px;
+  overflow-y:auto;
+}
+
+.bloque-material{
+  background:white;
+  padding:20px;
+  margin-bottom:30px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.bloque-material h2{
+  color:#003366;
+  margin-top:0;
+}
+
+iframe{
+  width:100%;
+  height:75vh;
+  border:none;
+  border-radius:10px;
+  background:white;
+}
+
+.mensaje{
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+footer{
+  background:#003366;
+  color:white;
+  text-align:center;
+  padding:15px;
+  font-size:14px;
+}
+
+/* Adaptación para tablet */
+@media(max-width:900px){
+  .contenedor{
+    flex-direction:column;
+  }
+
+  .menu{
+    width:100%;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .menu button{
+    min-width:140px;
+    margin-bottom:0;
+  }
+
+  iframe{
+    height:65vh;
+  }
+}
+
+/* Adaptación para celular */
+@media(max-width:600px){
+  header{
+    padding:90px 15px 20px;
+  }
+
+  .logo{
+    width:65px;
+    height:65px;
+    top:15px;
+  }
+
+  .logo-izq{
+    left:15px;
+  }
+
+  .logo-der{
+    right:15px;
+  }
+
+  header h1{
+    font-size:24px;
+  }
+
+  header p{
+    font-size:15px;
+  }
+
+  .visualizador{
+    padding:15px;
+  }
+
+  .bloque-material{
+    padding:12px;
+  }
+
+  iframe{
+    height:55vh;
+  }
+
+  footer{
+    font-size:12px;
+    padding:12px;
+  }
+}
+	/* Galería de fotografías */
+
+.galeria{
+  position:relative;
+  width:100%;
+  min-height:500px;
+  background:#111;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.galeria-imagen{
+  display:block;
+  width:100%;
+  max-height:75vh;
+  object-fit:contain;
+  background:#111;
+}
+
+.galeria-boton{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:50px;
+  height:60px;
+  border:none;
+  border-radius:8px;
+  background:rgba(0,0,0,0.65);
+  color:white;
+  font-size:32px;
+  cursor:pointer;
+  z-index:2;
+}
+
+.galeria-boton:hover{
+  background:rgba(0,51,102,0.9);
+}
+
+.galeria-anterior{
+  left:15px;
+}
+
+.galeria-siguiente{
+  right:15px;
+}
+
+.galeria-contador{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:14px;
+}
+
+.galeria-nombre{
+  position:absolute;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:80%;
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.galeria-cargando{
+  color:white;
+  font-size:18px;
+  text-align:center;
+  padding:40px;
+}
+
+@media(max-width:600px){
+  .galeria{
+    min-height:350px;
+  }
+
+  .galeria-boton{
+    width:42px;
+    height:52px;
+    font-size:26px;
+  }
+
+  .galeria-anterior{
+    left:5px;
+  }
+
+  .galeria-siguiente{
+    right:5px;
+  }
+
+  .galeria-imagen{
+    max-height:60vh;
+  }
+
+  .galeria-nombre{
+    font-size:13px;
+  }
+}
+	/* Galería de fotografías */
+
+.galeria{
+  position:relative;
+  width:100%;
+  min-height:500px;
+  background:#111;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.galeria-imagen{
+  display:block;
+  width:100%;
+  max-height:75vh;
+  object-fit:contain;
+  background:#111;
+}
+
+.galeria-boton{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:50px;
+  height:60px;
+  border:none;
+  border-radius:8px;
+  background:rgba(0,0,0,0.65);
+  color:white;
+  font-size:32px;
+  cursor:pointer;
+  z-index:2;
+}
+
+.galeria-boton:hover{
+  background:rgba(0,51,102,0.9);
+}
+
+.galeria-anterior{
+  left:15px;
+}
+
+.galeria-siguiente{
+  right:15px;
+}
+
+.galeria-contador{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:14px;
+}
+
+.galeria-nombre{
+  position:absolute;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:80%;
+  background:rgba(0,0,0,0.7);
+  color:white;
+  padding:8px 16px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.galeria-cargando{
+  color:white;
+  font-size:18px;
+  text-align:center;
+  padding:40px;
+}
+
+@media(max-width:600px){
+  .galeria{
+    min-height:350px;
+  }
+
+  .galeria-boton{
+    width:42px;
+    height:52px;
+    font-size:26px;
+  }
+
+  .galeria-anterior{
+    left:5px;
+  }
+
+  .galeria-siguiente{
+    right:5px;
+  }
+
+  .galeria-imagen{
+    max-height:60vh;
+  }
+
+  .galeria-nombre{
+    font-size:13px;
+  }
+}
+
+.boton-inicio{
+  display:inline-block;
+  margin-top:15px;
+  padding:9px 18px;
+  background:white;
+  color:#003366;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.boton-inicio:hover{
+  background:#e8eef5;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="utld.png" class="logo logo-izq" alt="Logo izquierdo">
+
+  <div>
+    <h1>Repositorio</h1>
+    <p>Energía Solar</p>
+
+    <a href="index.html" class="boton-inicio">
+      ← Volver a asignaturas
+    </a>
+
+  </div>
+
+  <img src="renders.png" class="logo logo-der" alt="Logo derecho">
+</header>
+
+<div class="contenedor">
+
+  <div class="menu" id="menu"></div>
+
+  <div class="visualizador" id="visualizador">
+    <div class="mensaje">
+      <h2>Selecciona una unidad</h2>
+      <p>Elige una unidad desbloqueada para visualizar sus materiales.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Universidad Tecnológica de La Laguna Durango | TSU Energía Turbo - Solar
+</footer>
+
+<script>
+const URL_APPS_SCRIPT =
+  "https://script.google.com/macros/s/AKfycbwf7FzEdHZ-g5nOYQ4WJn4jL4KbU5IQfEC_xDCVd0Ts0e-TrpZJGLXmtQf5ZYpUtefB/exec?folder=1xAD_WRT-E3M8UFT6BdxcGd4wBEmEAoNX";
+const unidades = [
+  {
+    nombre: "Unidad 1: Fundamentos de Energía Solar.",
+    activa: true,
+    recursos: [
+      {
+        titulo: "Presentación U1",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vRpBs-oomQ2uiqqgyqfWXeX9MWo8mBVpicMK0jO6YBC_nz1xAwJB68zZ6oYkj8naQ/pubembed?start=false&loop=false&delayms=5000"
+      }
+    ]
+  },
+
+  {
+    nombre: "Unidad 2: Sistemas de Captación y Conversión Solar Térmica.",
+    activa: true,
+    recursos: [
+      {
+        titulo: "Presentación",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vRF0NuhIsPcpRPlWEVuvjd7-TQeM42G4TqKsqr-x3Myv1gZHa0Sw2kzaLHeJB75lg/pubembed?start=false&loop=false&delayms=5000"
+      }
+    ]
+  },
+
+  {
+    nombre: "Unidad 3: Tecnología de Sistemas Fotovoltaicos.",
+    activa: true,
+    recursos: [
+      {
+        titulo: "Presentación",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vSnPg1w2gcGjgQv9GDIbIj5Yat2OWSp0KkgcuZTOCSd2iH3916Oze97jZOg6GcukQ/pubembed?start=false&loop=false&delayms=5000"
+      },
+	{
+        titulo: "Generar electricidad ¡Cómo funcionan los paneles solares!",
+        tipo: "video",
+        url: "https://drive.google.com/file/d/1_KBx7RCeY7V_vfyDBFyP4c9BxgYBbs_j/preview"
+      }
+    ]
+  },
+
+  {
+    nombre: "Unidad 4: Sistemas Fotovoltaicos.",
+    activa: false,
+    recursos: [
+      {
+        titulo: "Presentación",
+        tipo: "presentacion",
+        url: "https://docs.google.com/presentation/d/e/2PACX-1vRNhzF5z0eR-tSAiLiOPGF0KkJJjvCECnijtviJ7EXkBihfAU3SJSE3t4YYo7WsJg/pubembed?start=false&loop=false&delayms=5000"
+    },
+	{
+        titulo: "Cómo Funcionan Realmente las Turbinas Eólicas Los Secretos Ocultos",
+        tipo: "video",
+        url: "https://drive.google.com/file/d/1lQDa3ip7WKrzvJ8QvT0nC3ZY19gitq7w/preview"
+      },
+    {
+      titulo: "Fotografías y apuntes de clase",
+      tipo: "galeria",
+      carpetaId: "1xAD_WRT-E3M8UFT6BdxcGd4wBEmEAoNX"
+    	}
+    ]
+  },
+];
+
+const menu = document.getElementById("menu");
+const visualizador = document.getElementById("visualizador");
+
+unidades.forEach((unidad) => {
+  const boton = document.createElement("button");
+
+  boton.textContent = unidad.activa ? unidad.nombre : unidad.nombre + " 🔒";
+  boton.className = unidad.activa ? "activa" : "bloqueada";
+
+  boton.onclick = () => {
+    if(unidad.activa){
+      mostrarUnidadCompleta(unidad);
+    } else {
+      visualizador.innerHTML = `
+        <div class="mensaje">
+          <h2>${unidad.nombre} bloqueada 🔒</h2>
+          <p>Esta unidad estará disponible cuando el docente la active.</p>
+        </div>
+      `;
+    }
+  };
+
+  menu.appendChild(boton);
+});
+
+function mostrarUnidadCompleta(unidad){
+  let contenido = `
+    <h1>${unidad.nombre}</h1>
+  `;
+
+  unidad.recursos.forEach((recurso, indice) => {
+    contenido += `
+      <section class="bloque-material">
+        <h2>${icono(recurso.tipo)} ${recurso.titulo}</h2>
+    `;
+
+    if(recurso.tipo === "galeria"){
+      contenido += `
+        <div
+          class="galeria"
+          id="galeria-${indice}"
+          data-carpeta="${recurso.carpetaId}"
+        >
+          <div class="galeria-cargando">
+            Cargando fotografías...
+          </div>
+        </div>
+      `;
+    } else {
+      contenido += `
+        <iframe
+          src="${recurso.url}"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      `;
+    }
+
+    contenido += `
+      </section>
+    `;
+  });
+
+  visualizador.innerHTML = contenido;
+  visualizador.scrollTop = 0;
+
+  unidad.recursos.forEach((recurso, indice) => {
+    if(recurso.tipo === "galeria"){
+      cargarGaleria(
+        `galeria-${indice}`,
+        recurso.carpetaId
+      );
+    }
+  });
+}
+
+	async function cargarGaleria(contenedorId, carpetaId){
+  const contenedor = document.getElementById(contenedorId);
+
+  try {
+    const respuesta = await fetch(
+      `${URL_APPS_SCRIPT}?folder=${encodeURIComponent(carpetaId)}`
+    );
+
+    if(!respuesta.ok){
+      throw new Error("No fue posible consultar la carpeta.");
+    }
+
+    const imagenes = await respuesta.json();
+
+    if(imagenes.error){
+      throw new Error(imagenes.error);
+    }
+
+    if(!imagenes.length){
+      contenedor.innerHTML = `
+        <div class="galeria-cargando">
+          Esta carpeta todavía no contiene fotografías.
+        </div>
+      `;
+      return;
+    }
+
+    crearCarrusel(contenedor, imagenes);
+
+  } catch(error) {
+    console.error(error);
+
+    contenedor.innerHTML = `
+      <div class="galeria-cargando">
+        <p>No se pudieron cargar las fotografías.</p>
+        <small>${error.message}</small>
+      </div>
+    `;
+  }
+}
+
+function crearCarrusel(contenedor, imagenes){
+  let posicion = 0;
+
+  contenedor.innerHTML = `
+    <div class="galeria-nombre"></div>
+
+    <button
+      class="galeria-boton galeria-anterior"
+      aria-label="Fotografía anterior">
+      &#10094;
+    </button>
+
+    <img
+      class="galeria-imagen"
+      alt="Fotografía o apunte de clase"
+    >
+
+    <button
+      class="galeria-boton galeria-siguiente"
+      aria-label="Fotografía siguiente">
+      &#10095;
+    </button>
+
+    <div class="galeria-contador"></div>
+  `;
+
+  const imagen = contenedor.querySelector(".galeria-imagen");
+  const nombre = contenedor.querySelector(".galeria-nombre");
+  const contador = contenedor.querySelector(".galeria-contador");
+  const anterior = contenedor.querySelector(".galeria-anterior");
+  const siguiente = contenedor.querySelector(".galeria-siguiente");
+
+  function mostrarImagen(){
+    const elemento = imagenes[posicion];
+
+    imagen.src = elemento.url;
+    imagen.alt = elemento.nombre;
+    nombre.textContent = elemento.nombre;
+    contador.textContent =
+      `${posicion + 1} de ${imagenes.length}`;
+  }
+
+  anterior.addEventListener("click", () => {
+    posicion--;
+
+    if(posicion < 0){
+      posicion = imagenes.length - 1;
+    }
+
+    mostrarImagen();
+  });
+
+  siguiente.addEventListener("click", () => {
+    posicion++;
+
+    if(posicion >= imagenes.length){
+      posicion = 0;
+    }
+
+    mostrarImagen();
+  });
+
+  mostrarImagen();
+}
+
+function icono(tipo){
+  if(tipo === "presentacion") return "📊";
+  if(tipo === "pdf") return "📕";
+  if(tipo === "video") return "▶️";
+  if(tipo === "galeria") return "📷";
+  return "📁";
+}
+</script>
+
+</body>
+</html>
