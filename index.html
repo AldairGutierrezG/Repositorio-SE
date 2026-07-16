@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Repositorio Académico | 5.º Cuatrimestre</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f6f9;
+  color:#222;
+}
+
+header{
+  background:#003366;
+  color:white;
+  text-align:center;
+  padding:25px 120px;
+  position:relative;
+}
+
+.logo{
+  position:absolute;
+  top:15px;
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  background:white;
+  border-radius:10px;
+  padding:5px;
+}
+
+.logo-izq{
+  left:20px;
+}
+
+.logo-der{
+  right:20px;
+}
+
+header h1{
+  margin:0;
+  font-size:32px;
+}
+
+header p{
+  margin:8px 0 0;
+  font-size:18px;
+}
+
+main{
+  min-height:75vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+}
+
+main h2{
+  color:#003366;
+  margin-bottom:10px;
+}
+
+.instruccion{
+  color:#555;
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.asignaturas{
+  width:100%;
+  max-width:900px;
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:25px;
+}
+
+.tarjeta{
+  display:block;
+  background:white;
+  color:#222;
+  text-decoration:none;
+  border-radius:15px;
+  padding:35px 25px;
+  text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  border-top:8px solid #003366;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 22px rgba(0,0,0,0.22);
+}
+
+.icono{
+  font-size:55px;
+  display:block;
+  margin-bottom:15px;
+}
+
+.tarjeta h3{
+  color:#003366;
+  font-size:24px;
+  margin:0 0 12px;
+}
+
+.tarjeta p{
+  color:#555;
+  line-height:1.5;
+  margin:0;
+}
+
+.boton-entrar{
+  display:inline-block;
+  margin-top:22px;
+  padding:11px 24px;
+  background:#003366;
+  color:white;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+footer{
+  background:#003366;
+  color:white;
+  text-align:center;
+  padding:15px;
+  font-size:14px;
+}
+
+@media(max-width:700px){
+  header{
+    padding:95px 15px 20px;
+  }
+
+  .logo{
+    width:65px;
+    height:65px;
+  }
+
+  .logo-izq{
+    left:15px;
+  }
+
+  .logo-der{
+    right:15px;
+  }
+
+  header h1{
+    font-size:25px;
+  }
+
+  header p{
+    font-size:15px;
+  }
+
+  .asignaturas{
+    grid-template-columns:1fr;
+  }
+
+  main{
+    justify-content:flex-start;
+    padding-top:35px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="utld.png" class="logo logo-izq" alt="Logo UTL Durango">
+
+  <h1>Repositorio Académico</h1>
+  <p>5.º cuatrimestre | TSU Energía Turbo-Solar</p>
+
+  <img src="renders.png" class="logo logo-der" alt="Logo del programa educativo">
+</header>
+
+<main>
+  <h2>Selecciona una asignatura</h2>
+
+  <p class="instruccion">
+    Accede a las presentaciones, documentos, videos y materiales de cada materia.
+  </p>
+
+  <div class="asignaturas">
+
+    <a href="sistemas-electromecanicos.html" class="tarjeta">
+      <span class="icono">⚙️</span>
+
+      <h3>Sistemas Electromecánicos</h3>
+
+      <p>
+        Materiales relacionados con sistemas de generación,
+        conversión mecánica-eléctrica, minihidráulica,
+        aerogeneradores y sistemas turbo-solares.
+      </p>
+
+      <span class="boton-entrar">Entrar a la asignatura</span>
+    </a>
+
+    <a href="energia-solar.html" class="tarjeta">
+      <span class="icono">📚</span>
+
+      <h3>Energía Solar</h3>
+
+      <p>
+        Materiales relacionados con el aprovechamiento de la energía solar, radiación e irradiancia, tecnologías fotovoltaicas y térmicas, diseño de sistemas solares y aplicaciones para la generación de energía eléctrica y térmica.
+      </p>
+
+      <span class="boton-entrar">Entrar a la asignatura</span>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  Universidad Tecnológica de La Laguna Durango |
+  TSU Energía Turbo-Solar
+</footer>
+
+</body>
+</html>
